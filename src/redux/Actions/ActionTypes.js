@@ -1,0 +1,12 @@
+const ActionTypes = {
+  ADD_POST: 'ADD_POST',
+  DELETE_POST: 'DELETE_POST',
+  EDIT_POST: 'EDIT_POST',
+  ADD_COMMENT: 'ADD_COMMENT',
+  DELETE_COMMENT: 'DELETE_COMMENT',
+  ADD_LIKE: 'ADD_LIKE',
+  ALL_POSTS: 'ALL_POSTS',
+  SET_USER: 'SET_USER',
+  IS_LOGIN: 'IS_LOGIN',
+};
+export default ActionTypes;
