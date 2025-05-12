@@ -1,7 +1,7 @@
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity, ActivityIndicator} from 'react-native';
 import React from 'react';
 
-const Button = ({title, onPress,style}) => {
+const Button = ({title, onPress, style, loading}) => {
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -13,9 +13,13 @@ const Button = ({title, onPress,style}) => {
         alignItems: 'center',
         borderRadius: 8,
         marginTop: 8,
-        ...style
+        ...style,
       }}>
-      <Text style={{color: 'white'}}>{title}</Text>
+      {loading ? (
+        <ActivityIndicator size="small" color="white" />
+      ) : (
+        <Text style={{color: 'white'}}>{title}</Text>
+      )}
     </TouchableOpacity>
   );
 };

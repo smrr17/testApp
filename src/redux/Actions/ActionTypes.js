@@ -8,5 +8,6 @@ const ActionTypes = {
   ALL_POSTS: 'ALL_POSTS',
   SET_USER: 'SET_USER',
   IS_LOGIN: 'IS_LOGIN',
+  IS_MUTED: 'IS_MUTED',
 };
 export default ActionTypes;

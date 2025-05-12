@@ -14,7 +14,7 @@ const HomeScreen = () => {
   const onDelete = id => {
     firestore()
       .collection('posts')
-      .doc(Auth().currentUser.uid)
+      .doc(Auth().currentUser?.uid)
       .collection('userPosts')
       .doc(id)
       .delete()
@@ -29,7 +29,7 @@ const HomeScreen = () => {
   const getAllPosts = () => {
     firestore()
       .collection('posts')
-      .doc(Auth().currentUser.uid)
+      .doc(Auth().currentUser?.uid)
       .collection('userPosts')
       .get()
       .then(querySnapshot => {

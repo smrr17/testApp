@@ -1,5 +1,5 @@
 import {View, Text, TouchableOpacity} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import {useNavigation} from '@react-navigation/native';
@@ -7,13 +7,15 @@ import Auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import {useDispatch} from 'react-redux';
 import {isLogin, userData} from '../redux/Actions/AuthAction';
+import MMKVStorage from '../utils/Storage';
 
 const Register = () => {
   const navigation = useNavigation();
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [confirmPassword, setConfirmPassword] = React.useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
 
   const onSignUp = () => {
     if (!email || !password || !confirmPassword) {
@@ -22,6 +24,7 @@ const Register = () => {
     if (password !== confirmPassword) {
       return alert('Passwords do not match');
     }
+    setLoading(true);
     Auth()
       .createUserWithEmailAndPassword(email, password)
       .then(res => {
@@ -42,10 +45,22 @@ const Register = () => {
             password: password,
             id: res.user.uid,
           })
-          .then(() => {});
+          .then(() => {
+            MMKVStorage.setItem(
+              'user',
+              JSON.stringify({
+                email: data?.data()?.email,
+                id: data.data().id,
+                password: data.data().password,
+              }),
+            );
+          });
       })
       .catch(err => {
         alert(err.message);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -68,7 +83,7 @@ const Register = () => {
         onChangeText={setConfirmPassword}
         placeholder="Confirm Password"
       />
-      <Button title="Register" onPress={onSignUp} />
+      <Button loading={loading} title="Register" onPress={onSignUp} />
       <View style={{flexDirection: 'row', marginTop: 20}}>
         <Text>aAlready have an account? </Text>
         <TouchableOpacity onPress={() => navigation.navigate('Login')}>

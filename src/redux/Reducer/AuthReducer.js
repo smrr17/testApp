@@ -2,7 +2,8 @@ import ActionTypes from '../Actions/ActionTypes';
 
 const initialState = {
   user: null,
-  isLogin: false,
+  isLogin: undefined,
+  isMuted: false,
 };
 
 const AuthReducer = (state = initialState, action) => {
@@ -16,6 +17,11 @@ const AuthReducer = (state = initialState, action) => {
       return {
         ...state,
         isLogin: action.payload,
+      };
+    case ActionTypes.IS_MUTED:
+      return {
+        ...state,
+        isMuted: action.payload,
       };
     default:
       break;

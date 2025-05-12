@@ -13,11 +13,11 @@ const AddPost = () => {
     }
     firestore()
       .collection('posts')
-      .doc(Auth().currentUser.uid)
+      .doc(Auth().currentUser?.uid)
       .collection('userPosts')
       .add({
         post: post,
-        userId: Auth().currentUser.uid,
+        userId: Auth().currentUser?.uid,
         isLiked: false,
         comments: [],
       })
@@ -26,7 +26,7 @@ const AddPost = () => {
         setPost('');
       });
   };
- 
+
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <Input

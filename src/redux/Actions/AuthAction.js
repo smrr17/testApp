@@ -12,5 +12,11 @@ const userData = payload => {
     payload,
   };
 };
+const setIsMute = payload => {
+  return {
+    type: ActionTypes.IS_MUTED,
+    payload,
+  };
+};
 
-export {isLogin, userData};
+export {isLogin, userData, setIsMute};

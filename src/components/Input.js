@@ -1,10 +1,18 @@
 import {View, Text, TextInput} from 'react-native';
 import React from 'react';
 
-const Input = ({value, onChangeText, placeholder, style, numberOfLines}) => {
+const Input = ({
+  value,
+  onChangeText,
+  placeholder,
+  style,
+  numberOfLines,
+  secureTextEntry,
+}) => {
   return (
     <TextInput
       value={value}
+      secureTextEntry={secureTextEntry}
       verticalAlign="top"
       multiline={numberOfLines ? true : false}
       numberOfLines={numberOfLines}
